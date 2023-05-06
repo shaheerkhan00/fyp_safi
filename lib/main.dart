@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import './signup.dart';
+import './login.dart';
+import './startPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
   runApp(const MyApp());
 }
 
@@ -24,7 +32,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: StartPage(),
+      routes: {
+        LoginPage.routeName: (ctx) => LoginPage(),
+        SignupPage.routeName: (ctx) => SignupPage(),
+      },
     );
   }
 }
